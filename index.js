@@ -15,6 +15,8 @@ const minCount = req.body.minCount;
 const startDate = req.body.startDate;
 const endDate = req.body.endDate;
 
+res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+res.header("Access-Control-Allow-Methods", "PATCH, POST, GET, PUT, DELETE, OPTIONS");
 res.writeHead(200, {"Content-Type": "application/json"});
 
 MongoClient.connect(url, function(err, db) {
@@ -39,11 +41,6 @@ MongoClient.connect(url, function(err, db) {
                 msg: "Success",
                 records: records
             });
-            res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
-            res.header("Access-Control-Allow-Methods", "PATCH, POST, GET, PUT, DELETE, OPTIONS");
-            if ('OPTIONS' === req.method) {
-                return res.send(200);
-            }
             res.end(json);
         }
     });
