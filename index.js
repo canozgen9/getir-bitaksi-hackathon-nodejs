@@ -39,6 +39,11 @@ MongoClient.connect(url, function(err, db) {
                 msg: "Success",
                 records: records
             });
+            res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+            res.header("Access-Control-Allow-Methods", "PATCH, POST, GET, PUT, DELETE, OPTIONS");
+            if ('OPTIONS' === req.method) {
+                return res.send(200);
+            }
             res.end(json);
         }
     });
